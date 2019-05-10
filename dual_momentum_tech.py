@@ -1,6 +1,18 @@
 # dual momentum for major software tech stocks
 
 import pylivetrader.algorithm as algo
+from pylivetrader.api import (
+    attach_pipeline,
+    date_rules,
+    get_datetime,
+    time_rules,
+    order,
+    get_open_orders,
+    cancel_order,
+    pipeline_output,
+    schedule_function,
+)
+
 
 _NUM_HOLINGS = 4
 _WINDOW_SIZE = 22 # 22 days = 1 month
