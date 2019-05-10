@@ -16,6 +16,7 @@ def record(*args, **kwargs):
     print('args={}, kwargs={}'.format(args, kwargs))
 
 def initialize(context):
+    log.info("initializing")
     context.currently_holding = set()
     schedule_function(clear, date_rules.month_start(), time_rules.market_open())
     schedule_function(daily_rebalance, date_rules.every_day(), time_rules.market_open(hours=1))
