@@ -8,6 +8,13 @@ MAX_GROSS_LEVERAGE = 1.0
 MAX_LONG_POSITION_SIZE = 1.00
 MAX_SHORT_POSITION_SIZE = 1.00
 
+import logbook
+
+log = logbook.Logger('algo')
+
+def record(*args, **kwargs):
+    print('args={}, kwargs={}'.format(args, kwargs))
+
 def initialize(context):
     context.currently_holding = set()
     schedule_function(clear, date_rules.month_start(), time_rules.market_open())
