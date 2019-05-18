@@ -38,10 +38,15 @@ def before_trading_start(context, data):
     context.days_cnt += 1
 
 def handle_data(context, data):
+    t = get_datetime()
+    print('current time', t)
     assets = symbols('AAPL','GOOG','MSFT','AMZN')
     safe = symbol('TLT')
     
-    assets_hist = data.history(assets, 'price', _WINDOW_SIZE + 1, '1d')
+    assets_hist = data.history(assets, 'price', 5, '1m')
+    print(assets_hist)
+
+    '''
     mom = ((assets_hist.iloc[-1]/assets_hist.iloc[0]) - 1.0).dropna()
     top_mom = mom.sort_values()[-_NUM_HOLINGS:]
     top_assets = top_mom.index
@@ -53,11 +58,9 @@ def handle_data(context, data):
     
     target_weights = {}
 
-    '''
-    choose tops assets as long as its moment is larger than safe's momentum
-    otherwise choose safe as long as its momentum is positive
-    otherwise choose tlt
-    '''
+    # choose tops assets as long as its moment is larger than safe's momentum
+    # otherwise choose safe as long as its momentum is positive
+    # otherwise choose tlt
     picks = 0
     for i in range(n_picks):
         a = top_assets[i]
@@ -84,6 +87,7 @@ def handle_data(context, data):
         leverage = context.account.leverage,
         holdings = len(context.currently_holding),
         total_weight = total_weight,
-    )        
+    )
+    '''
 
 
